@@ -13,7 +13,6 @@ class CityModel: NSObject {
     var name: String?
     var cityId: NSInteger? = 0
     var orderBy: NSInteger? = 0
-//    var childList: [String: Any]?
     
     
       override init() {
@@ -26,19 +25,19 @@ class CityModel: NSObject {
     }
     
  
-   class func citys() -> [CityModel]{
-        var citys  = [CityModel]()
-        
-        let path = Bundle.main.path(forResource: "province", ofType: "txt")
-        let citydata = NSData(contentsOfFile: path!)! as Data
-        guard let jsonArray:[[String: Any]] = try? JSONSerialization.jsonObject(with: citydata, options: JSONSerialization.ReadingOptions.allowFragments) as! [[String: Any]] else {
-            return []
-        }
-        for dict in jsonArray {
-            let model = CityModel(dict: dict)
-            citys.append(model)
-         }
-        return citys
-
-    }
+//   class func citys() -> [CityModel]{
+//        var citys  = [CityModel]()
+//        
+//        let path = Bundle.main.path(forResource: "province", ofType: "txt")
+//        let citydata = NSData(contentsOfFile: path!)! as Data
+//        guard let jsonArray:[[String: Any]] = try? JSONSerialization.jsonObject(with: citydata, options: JSONSerialization.ReadingOptions.allowFragments) as! [[String: Any]] else {
+//            return []
+//        }
+//        for dict in jsonArray {
+//            let model = CityModel(dict: dict)
+//            citys.append(model)
+//         }
+//        return citys
+//
+//    }
 }

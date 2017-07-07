@@ -19,11 +19,12 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         
-         dataArray =  cityCache.sharedCity.readoutData()
-        print(dataArray.count)
+        dataArray =  cityCache.sharedCity.readoutProvinceData()
        setupProvinceView()
         
     }
+    
+    
 
     func setupProvinceView() {
         

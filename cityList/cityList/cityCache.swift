@@ -13,14 +13,14 @@ class cityCache: NSObject {
     var dbQueue:FMDatabaseQueue?
   static  let sharedCity = cityCache()
 
-    // 读取城市数据源
-    func readoutData() -> [CityModel] {
+    // 读取省份数据源
+    func readoutProvinceData() -> [CityModel] {
         
         openDb()
         var tempArray = [CityModel]()
         
         dbQueue?.inDatabase({ (db) in
-            let sq = "select * from T_PCITY"
+            let sq = "select PID,Name from T_PCITY where parentID is NULL"
             guard   let sets = try? db.executeQuery(sq, values: nil) else{
                 return
             }
@@ -29,7 +29,6 @@ class cityCache: NSObject {
                 let model = CityModel()
             model.name = sets.string(forColumn: "Name")
             model.cityId = NSInteger( sets.int(forColumn: "PID"))
-            model.orderBy = NSInteger (sets.int(forColumn: "OrderByID"))
             tempArray.append(model)
             }
             db.close()
@@ -77,6 +76,8 @@ class cityCache: NSObject {
         
         
         let provinceSq = "insert or replace into T_PCITY(PID,Name,OrderByID) values (?,?,?)"
+        let citySq =  "insert or replace into T_PCITY(PID,Name,parentID) values (?,?,?)"
+
         let path = Bundle.main.path(forResource: "province", ofType: "txt")
         let citydata = NSData(contentsOfFile: path!)! as Data
         guard let jsonArray:[[String: Any]] = try? JSONSerialization.jsonObject(with: citydata, options: JSONSerialization.ReadingOptions.allowFragments) as! [[String: Any]]  else {
@@ -94,8 +95,20 @@ class cityCache: NSObject {
                     let name = dict["Name"]
                     let pid = dict["ID"]
                     let  orderid = dict["OrderByID"]
+                    
                     try db.executeUpdate(provinceSq, values: [pid,name,orderid])
-                    print("插入成功")
+                    
+                    if (dict["Childlist"] != nil){
+                        let childList:[[String: Any]] = dict["Childlist"] as! [[String: Any]]
+                        
+                        for childDict in childList {
+                            guard db.executeUpdate(citySq, withArgumentsIn: [childDict["ID"],childDict["Name"],dict["ID"]]) else{
+                                return
+                            }
+                            print("插入成功")
+                        }
+
+                    }
         
                 }
             }catch{
