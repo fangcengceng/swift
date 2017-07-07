@@ -11,14 +11,16 @@ import FMDB
 
 class cityCache: NSObject {
     var dbQueue:FMDatabaseQueue?
-  static  let sharedCity = cityCache()
-
+    static  let sharedCity = cityCache()
+    var provinctArr = [CityModel]()
+    
     // 读取省份数据源
     func readoutProvinceData() -> [CityModel] {
         
         openDb()
-        var tempArray = [CityModel]()
-        
+        transInsertData()
+
+
         dbQueue?.inDatabase({ (db) in
             let sq = "select PID,Name from T_PCITY where parentID is NULL"
             guard   let sets = try? db.executeQuery(sq, values: nil) else{
@@ -29,12 +31,80 @@ class cityCache: NSObject {
                 let model = CityModel()
             model.name = sets.string(forColumn: "Name")
             model.cityId = NSInteger( sets.int(forColumn: "PID"))
-            tempArray.append(model)
+            provinctArr.append(model)
             }
             db.close()
         })
-       
+        return provinctArr
+    }
+    
+    func readoutCityData() -> [[CityModel]] {
+        
+        var cityArray = [CityModel]()
+        
+        var bigArray = [[CityModel]]()
+
+            for model in provinctArr {
+                openDb()
+
+                dbQueue?.inDatabase({ (db) in
+                    let sq = "select PID,Name from T_PCITY where parentID = ?"
+                guard let sets = db.executeQuery(sq, withArgumentsIn: [model.cityId]) else{
+                     return
+                }
+                
+                while sets.next(){
+                    let model = CityModel()
+                    model.name = sets.string(forColumn: "Name")
+                    model.cityId = NSInteger( sets.int(forColumn: "PID"))
+                    cityArray.append(model)
+                }
+                
+                    
+                    
+                 db.close()
+                })
+                bigArray.append(cityArray)
+
+            }
+        
+      
+        return bigArray
+    }
+    
+    
+    func readoutAllCityData() -> [CityModel] {
+        
+        openDb()
+
+        var tempArray = [CityModel]()
+        
+        dbQueue?.inDatabase({ (db) in
+            let sq = "select PID,Name from T_PCITY where OrderByID = 0"
+            guard   let sets = try? db.executeQuery(sq, values: nil) else{
+                return
+            }
+            
+            while   sets.next(){
+                let model = CityModel()
+                model.name = sets.string(forColumn: "Name")
+                model.cityId = NSInteger( sets.int(forColumn: "PID"))
+
+                tempArray.append(model)
+                
+                for model in provinctArr{
+                    
+
+                }
+            }
+            db.close()
+        })
+        
+        
+        
         return tempArray
+
+        
     }
     
     
@@ -68,7 +138,6 @@ class cityCache: NSObject {
         })
         print("建表成功")
  
-       transInsertData()
     }
     
     // 插入数据
@@ -76,7 +145,7 @@ class cityCache: NSObject {
         
         
         let provinceSq = "insert or replace into T_PCITY(PID,Name,OrderByID) values (?,?,?)"
-        let citySq =  "insert or replace into T_PCITY(PID,Name,parentID) values (?,?,?)"
+        let citySq =  "insert or replace into T_PCITY(PID,Name,OrderByID,parentID) values (?,?,?,?)"
 
         let path = Bundle.main.path(forResource: "province", ofType: "txt")
         let citydata = NSData(contentsOfFile: path!)! as Data
@@ -102,7 +171,7 @@ class cityCache: NSObject {
                         let childList:[[String: Any]] = dict["Childlist"] as! [[String: Any]]
                         
                         for childDict in childList {
-                            guard db.executeUpdate(citySq, withArgumentsIn: [childDict["ID"],childDict["Name"],dict["ID"]]) else{
+                            guard db.executeUpdate(citySq, withArgumentsIn: [childDict["ID"],childDict["Name"],childDict["OrderByID"],dict["ID"]]) else{
                                 return
                             }
                             print("插入成功")
