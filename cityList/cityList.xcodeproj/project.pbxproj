@@ -13,6 +13,9 @@
 		7C470FF01F0F218E00D8C124 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C470FEE1F0F218E00D8C124 /* Main.storyboard */; };
 		7C470FF21F0F218E00D8C124 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C470FF11F0F218E00D8C124 /* Assets.xcassets */; };
 		7C470FF51F0F218E00D8C124 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C470FF31F0F218E00D8C124 /* LaunchScreen.storyboard */; };
+		7C470FFD1F0F24B700D8C124 /* province.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7C470FFC1F0F24B700D8C124 /* province.txt */; };
+		7C470FFF1F0F24CB00D8C124 /* cityCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C470FFE1F0F24CB00D8C124 /* cityCache.swift */; };
+		7C4710011F0F2C0B00D8C124 /* CityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4710001F0F2C0B00D8C124 /* CityModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +28,9 @@
 		7C470FF11F0F218E00D8C124 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7C470FF41F0F218E00D8C124 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7C470FF61F0F218E00D8C124 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7C470FFC1F0F24B700D8C124 /* province.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = province.txt; sourceTree = "<group>"; };
+		7C470FFE1F0F24CB00D8C124 /* cityCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cityCache.swift; sourceTree = "<group>"; };
+		7C4710001F0F2C0B00D8C124 /* CityModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityModel.swift; sourceTree = "<group>"; };
 		E3313124266C020C72A13CD4 /* Pods_cityList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cityList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -72,8 +78,11 @@
 			children = (
 				7C470FEA1F0F218E00D8C124 /* AppDelegate.swift */,
 				7C470FEC1F0F218E00D8C124 /* ViewController.swift */,
+				7C470FFE1F0F24CB00D8C124 /* cityCache.swift */,
+				7C4710001F0F2C0B00D8C124 /* CityModel.swift */,
 				7C470FEE1F0F218E00D8C124 /* Main.storyboard */,
 				7C470FF11F0F218E00D8C124 /* Assets.xcassets */,
+				7C470FFC1F0F24B700D8C124 /* province.txt */,
 				7C470FF31F0F218E00D8C124 /* LaunchScreen.storyboard */,
 				7C470FF61F0F218E00D8C124 /* Info.plist */,
 			);
@@ -150,6 +159,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C470FFD1F0F24B700D8C124 /* province.txt in Resources */,
 				7C470FF51F0F218E00D8C124 /* LaunchScreen.storyboard in Resources */,
 				7C470FF21F0F218E00D8C124 /* Assets.xcassets in Resources */,
 				7C470FF01F0F218E00D8C124 /* Main.storyboard in Resources */,
@@ -211,8 +221,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C4710011F0F2C0B00D8C124 /* CityModel.swift in Sources */,
 				7C470FED1F0F218E00D8C124 /* ViewController.swift in Sources */,
 				7C470FEB1F0F218E00D8C124 /* AppDelegate.swift in Sources */,
+				7C470FFF1F0F24CB00D8C124 /* cityCache.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -382,6 +394,7 @@
 				7C470FFB1F0F218E00D8C124 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
