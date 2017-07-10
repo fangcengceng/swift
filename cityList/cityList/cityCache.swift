@@ -73,38 +73,44 @@ class cityCache: NSObject {
     }
     
     
-    func readoutAllCityData() -> [CityModel] {
+    func readoutAllCityData() -> [[CityModel]] {
         
         openDb()
-
-        var tempArray = [CityModel]()
+        
+        var sectionArray = [[CityModel]]()
+        var modelArray = [CityModel]()
+        
+        let sql = "select PID,Name from T_PCITY where parentID is not NULL"
+        
         
         dbQueue?.inDatabase({ (db) in
-            let sq = "select PID,Name from T_PCITY where OrderByID = 0"
-            guard   let sets = try? db.executeQuery(sq, values: nil) else{
-                return
-            }
-            
-            while   sets.next(){
-                let model = CityModel()
-                model.name = sets.string(forColumn: "Name")
-                model.cityId = NSInteger( sets.int(forColumn: "PID"))
 
-                tempArray.append(model)
-                
-                for model in provinctArr{
-                    
-
+                guard let sets = try? db.executeQuery(sql, values: []) else{
+                    return
                 }
-            }
-            db.close()
-        })
-        
-        
-        
-        return tempArray
+                while sets.next(){
+                    let model = CityModel()
+                    model.name = sets.string(forColumn: "Name")
+                    model.cityId = NSInteger( sets.int(forColumn: "PID"))
+                    modelArray.append(model)
+                    
+                }
+                
 
+          
+            db.close()
+
+        })
+
+       
+
+      sectionArray.append(modelArray)
+       
         
+        
+        
+        
+        return sectionArray
     }
     
     

@@ -23,12 +23,12 @@ class ViewController: UIViewController {
 
         
         dataArray =  cityCache.sharedCity.readoutProvinceData()
-        let cityArray = cityCache.sharedCity.readoutAllCityData()
+       cityArray = cityCache.sharedCity.readoutAllCityData()
         print(cityArray.count)
         
 //        cityArray = cityCache.sharedCity.readoutCityData()
         setupProvinceView()
-//        setupChildView()
+        setupChildView()
         
         
     }
