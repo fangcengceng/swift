@@ -13,7 +13,7 @@ class CityModel: NSObject {
     var name: String?
     var cityId: NSInteger? = 0
     var orderBy: NSInteger? = 0
-    
+    var parentId: NSInteger? = 0
     
       override init() {
          super.init()

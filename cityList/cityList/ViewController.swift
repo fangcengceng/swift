@@ -14,7 +14,7 @@ class ViewController: UIViewController {
 
     
     var dataArray = [CityModel]()
-    var cityArray = [BIgModel]()
+    var cityArray = [[CityModel]]()
     var provinceView: UITableView?
     var cityView: UITableView?
     
@@ -67,7 +67,7 @@ extension ViewController: UITableViewDataSource,UITableViewDelegate {
         return tableView == provinceView ? 1 : cityArray.count
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableView == provinceView ?  dataArray.count : cityArray[section].citysArray.count
+        return tableView == provinceView ?  dataArray.count : cityArray[section].count
 
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -80,7 +80,7 @@ extension ViewController: UITableViewDataSource,UITableViewDelegate {
 
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "city", for: indexPath)
-            let model = cityArray[indexPath.section].citysArray[indexPath.row];
+            let model = cityArray[indexPath.section][indexPath.row];
             
 //            cell.textLabel?.text = "\(indexPath.section)" + "\(indexPath.row)"
             cell.textLabel?.text = model.name

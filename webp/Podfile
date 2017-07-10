@@ -1,0 +1,7 @@
+ platform :ios, '9.0'
+
+target 'webp' do
+  pod 'SDWebImage'
+  pod 'SDWebImage/WebP'
+
+end

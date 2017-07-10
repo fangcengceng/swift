@@ -73,7 +73,7 @@ class cityCache: NSObject {
     }
     
     
-    func readoutAllCityData() -> [BIgModel] {
+    func readoutAllCityData() -> [[CityModel]] {
         
         openDb()
         
@@ -92,6 +92,7 @@ class cityCache: NSObject {
                     let model = CityModel()
                     model.name = sets.string(forColumn: "Name")
                     model.cityId = NSInteger( sets.int(forColumn: "PID"))
+                    model.parentId =  NSInteger( sets.int(forColumn: "parentID"))
                     modelArray.append(model)
                     
                 }
@@ -138,25 +139,24 @@ class cityCache: NSObject {
             
         }
 
-        let sets = NSMutableSet()
-        
-        
-        
-        
-        for i in 0..<modelArray.count{
-            let startID = modelArray[i]
-            
-            if startID == modelArray[i+1] {
+        var startID = modelArray[0].parentId
+    var mu = [CityModel]()
+        for (i,model) in modelArray.enumerated() {
+            if startID == model.parentId {
+                mu.append(model)
                 
+                
+            }else{
+                startID = model.parentId;
+                break;
             }
-            
-            
-            
-            
-            
         }
+        var ss = [[CityModel]]()
+        ss.append(mu)
         
-        return sectionArray
+        
+        
+        return ss
     }
     
     
