@@ -16,6 +16,7 @@
 		7C470FFD1F0F24B700D8C124 /* province.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7C470FFC1F0F24B700D8C124 /* province.txt */; };
 		7C470FFF1F0F24CB00D8C124 /* cityCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C470FFE1F0F24CB00D8C124 /* cityCache.swift */; };
 		7C4710011F0F2C0B00D8C124 /* CityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4710001F0F2C0B00D8C124 /* CityModel.swift */; };
+		7C8BF8B71F1332230009E5BF /* BIgModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8BF8B61F1332230009E5BF /* BIgModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		7C470FFC1F0F24B700D8C124 /* province.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = province.txt; sourceTree = "<group>"; };
 		7C470FFE1F0F24CB00D8C124 /* cityCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cityCache.swift; sourceTree = "<group>"; };
 		7C4710001F0F2C0B00D8C124 /* CityModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityModel.swift; sourceTree = "<group>"; };
+		7C8BF8B61F1332230009E5BF /* BIgModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BIgModel.swift; sourceTree = "<group>"; };
 		E3313124266C020C72A13CD4 /* Pods_cityList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cityList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -79,6 +81,7 @@
 				7C470FEA1F0F218E00D8C124 /* AppDelegate.swift */,
 				7C470FEC1F0F218E00D8C124 /* ViewController.swift */,
 				7C470FFE1F0F24CB00D8C124 /* cityCache.swift */,
+				7C8BF8B61F1332230009E5BF /* BIgModel.swift */,
 				7C4710001F0F2C0B00D8C124 /* CityModel.swift */,
 				7C470FEE1F0F218E00D8C124 /* Main.storyboard */,
 				7C470FF11F0F218E00D8C124 /* Assets.xcassets */,
@@ -224,6 +227,7 @@
 				7C4710011F0F2C0B00D8C124 /* CityModel.swift in Sources */,
 				7C470FED1F0F218E00D8C124 /* ViewController.swift in Sources */,
 				7C470FEB1F0F218E00D8C124 /* AppDelegate.swift in Sources */,
+				7C8BF8B71F1332230009E5BF /* BIgModel.swift in Sources */,
 				7C470FFF1F0F24CB00D8C124 /* cityCache.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

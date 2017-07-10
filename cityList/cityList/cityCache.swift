@@ -73,11 +73,11 @@ class cityCache: NSObject {
     }
     
     
-    func readoutAllCityData() -> [[CityModel]] {
+    func readoutAllCityData() -> [BIgModel] {
         
         openDb()
         
-        var sectionArray = [[CityModel]]()
+        var sectionArray = [BIgModel]()
         var modelArray = [CityModel]()
         
         let sql = "select PID,Name from T_PCITY where parentID is not NULL"
@@ -102,13 +102,59 @@ class cityCache: NSObject {
 
         })
 
-       
+       print(modelArray.count)
 
-      sectionArray.append(modelArray)
+        var exists = false
+        
+        for model in modelArray {
+            
+            for bigModel in sectionArray {
+                bigModel.parentID = model.cityId
+                exists = true
+                break
+            }
+            
+            if !exists {
+                
+                let sectionModel = BIgModel.init()
+                sectionModel.parentID = model.cityId
+                sectionArray.append(sectionModel)
+                
+            }
+            
+            
+            
+        }
        
         
+        for sectionModel in sectionArray {
+           var jobs = [CityModel]()
+            for  model in modelArray {
+                if sectionModel.parentID == model.cityId {
+                    jobs.append(model)
+                }
+            }
+            sectionModel.citysArray = jobs;
+            
+        }
+
+        let sets = NSMutableSet()
         
         
+        
+        
+        for i in 0..<modelArray.count{
+            let startID = modelArray[i]
+            
+            if startID == modelArray[i+1] {
+                
+            }
+            
+            
+            
+            
+            
+        }
         
         return sectionArray
     }
