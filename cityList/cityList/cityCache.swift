@@ -77,7 +77,6 @@ class cityCache: NSObject {
         
         openDb()
         
-        var sectionArray = [BIgModel]()
         var modelArray = [CityModel]()
         
         let sql = "select PID,Name from T_PCITY where parentID is not NULL"
@@ -96,69 +95,46 @@ class cityCache: NSObject {
                     modelArray.append(model)
                     
                 }
-                
-
-          
             db.close()
 
         })
 
-       print(modelArray.count)
-
-        var exists = false
-        
-        for model in modelArray {
-            
-            for bigModel in sectionArray {
-                bigModel.parentID = model.cityId
-                exists = true
-                break
-            }
-            
-            if !exists {
-                
-                let sectionModel = BIgModel.init()
-                sectionModel.parentID = model.cityId
-                sectionArray.append(sectionModel)
-                
-            }
-            
-            
-            
-        }
        
+       print(modelArray.count)
         
-        for sectionModel in sectionArray {
-           var jobs = [CityModel]()
-            for  model in modelArray {
-                if sectionModel.parentID == model.cityId {
-                    jobs.append(model)
-                }
-            }
-            sectionModel.citysArray = jobs;
-            
-        }
-
-        var startID = modelArray[0].parentId
-    var mu = [CityModel]()
-        for (i,model) in modelArray.enumerated() {
-            if startID == model.parentId {
-                mu.append(model)
-                
-                
-            }else{
-                startID = model.parentId;
-                break;
-            }
-        }
-        var ss = [[CityModel]]()
-        ss.append(mu)
-        
-        
-        
-        return ss
+        return resestSectionArray(array: modelArray)
     }
     
+    func resestSectionArray(array: [CityModel]) -> [[CityModel]] {
+        var sectionArray = [[CityModel]]()
+        var currentArray = [CityModel]()
+        let model = array[0]
+        currentArray.append(model)
+        sectionArray.append(currentArray)
+        
+
+        if array.count > 1 {
+            
+            for i  in 1..<array.count {
+                let preArr = [sectionArray[sectionArray.count - 1]]
+                let firstModel = preArr[0][0]
+                
+                let comparModel = array[i]
+                if comparModel.parentId == firstModel.parentId {
+                    currentArray.append(comparModel)
+                }else{
+                    currentArray = [CityModel]()
+                    currentArray.append(comparModel)
+                    sectionArray.append(currentArray)
+                }
+                
+                
+            }
+
+        }
+        
+                return sectionArray
+    }
     
     // 打开数据库
      private  func openDb() {
