@@ -18,9 +18,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIImageView *mg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 300, 300)];
-    [mg sd_setImageWithURL:[NSURL URLWithString:@"http://p1.pstatp.com/origin/2deb0004d84d0b5c6192.webp"]];
-    [self.view addSubview:mg];
+//    UIImageView *mg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 300, 300)];
+//    [mg sd_setImageWithURL:[NSURL URLWithString:@"http://p1.pstatp.com/origin/2deb0004d84d0b5c6192.webp"]];
+//    [self.view addSubview:mg];
+    
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, 300, 300)];
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://p1.pstatp.com/origin/2deb0004d84d0b5c6192"]];
+    [webView loadRequest:request];
+    [self.view addSubview:webView];
+    
 }
 
 
